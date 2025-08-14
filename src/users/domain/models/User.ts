@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { UserId } from "../valueObject/UserId";
+import { UserFirstName } from '../valueObject/UserFirstName';
 
 export class User {
     id: UserId;
-    first_name: string;
+    first_name: UserFirstName;
     last_name: string;
     email: string;
     phone: string;
@@ -11,7 +12,7 @@ export class User {
     is_verified: boolean;
 
     private constructor(
-        first_name: string,
+        first_name: UserFirstName,
         last_name: string,
         email: string,
         phone: string,
@@ -30,7 +31,7 @@ export class User {
 
     // Factory para crear nuevo usuario
     static createNew(
-        first_name: string,
+        first_name: UserFirstName,
         last_name: string,
         email: string,
         phone: string
@@ -39,19 +40,23 @@ export class User {
     }
 
     verify(): void {
-    this.is_verified = true;
-  }
+        this.is_verified = true;
+    }
 
-  // opcional: método para activar usuario
-  activate(): void {
-    this.is_active = true;
-  }
+    // opcional: método para activar usuario
+    activate(): void {
+        this.is_active = true;
+    }
+    
+    desactive(): void{
+        this.is_active = false;
+    }
 
 
     // Factory para reconstruir desde la base de datos
     static fromPrimitives(data: {
         id: string;
-        first_name: string;
+        first_name: UserFirstName;
         last_name: string;
         email: string;
         phone: string;
