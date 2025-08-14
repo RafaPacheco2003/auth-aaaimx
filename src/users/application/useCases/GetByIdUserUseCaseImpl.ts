@@ -11,6 +11,6 @@ export class GetByIdUserUseCaseImpl implements GetByIdUserUseCase {
     ) {}
 
     async getById(id: string): Promise<User | null> {
-        return await this.userRepository.findById(new UserId(id));
+        return await this.userRepository.findById(id);
     }
 }

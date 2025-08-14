@@ -3,8 +3,8 @@ import { UserId } from "../valueObject/UserId";
 import { UserFirstName } from '../valueObject/UserFirstName';
 
 export class User {
-    id: UserId;
-    first_name: UserFirstName;
+    id: string;
+    first_name: string;
     last_name: string;
     email: string;
     phone: string;
@@ -12,15 +12,15 @@ export class User {
     is_verified: boolean;
 
     private constructor(
-        first_name: UserFirstName,
+        first_name: string,
         last_name: string,
         email: string,
         phone: string,
         is_active: boolean,
         is_verified: boolean,
-        id?: UserId
+        id?: string
     ) {
-        this.id = id ?? new UserId(uuidv4());
+        this.id = id ?? uuidv4();
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;

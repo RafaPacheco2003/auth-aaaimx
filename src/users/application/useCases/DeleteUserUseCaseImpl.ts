@@ -12,6 +12,6 @@ export class DeleteUserUseCaseImpl implements DeleteUserUseCase {
     ) {}
 
     async delete(id: string): Promise<void> {
-        await this.userRepository.delete(new UserId(id));
+        await this.userRepository.delete(id);
     }
 }
