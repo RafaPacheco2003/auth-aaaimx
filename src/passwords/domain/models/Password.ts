@@ -15,8 +15,6 @@ export class Password{
     }
 
 
-    static createNew(hash_password: string, salt: string, alg: string, id_user: string):Password{
-        return new Password(hash_password, salt, alg, id_user);
-    }
+   
     
 }

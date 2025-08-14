@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { UserId } from "../valueObject/UserId";
-import { UserFirstName } from '../valueObject/UserFirstName';
+
 
 export class User {
     id: string;
@@ -31,7 +30,7 @@ export class User {
 
     // Factory para crear nuevo usuario
     static createNew(
-        first_name: UserFirstName,
+        first_name: string,
         last_name: string,
         email: string,
         phone: string
@@ -56,7 +55,7 @@ export class User {
     // Factory para reconstruir desde la base de datos
     static fromPrimitives(data: {
         id: string;
-        first_name: UserFirstName;
+        first_name: string;
         last_name: string;
         email: string;
         phone: string;
@@ -70,7 +69,7 @@ export class User {
             data.phone,
             data.is_active,
             data.is_verified,
-            new UserId(data.id)
+            data.id
         );
     }
 }

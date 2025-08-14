@@ -1,17 +1,18 @@
+import { Inject, Injectable } from "@nestjs/common";
 import { User } from "src/users/domain/models/User";
-import { CreateUserUseCase } from "src/users/domain/port/in/CreateUserUseCase";
-import { DeleteUserUseCase } from "src/users/domain/port/in/DeleteUserUseCase";
-import { GetAllUserUseCase } from "src/users/domain/port/in/GetAllUserUseCase";
-import { GetByIdUserUseCase } from "src/users/domain/port/in/GetByIdUserUseCase";
+import type { CreateUserUseCase } from "src/users/domain/port/in/CreateUserUseCase";
+import type { DeleteUserUseCase } from "src/users/domain/port/in/DeleteUserUseCase";
+import type { GetAllUserUseCase } from "src/users/domain/port/in/GetAllUserUseCase";
+import type { GetByIdUserUseCase } from "src/users/domain/port/in/GetByIdUserUseCase";
 
-export class UserService implements CreateUserUseCase, GetAllUserUseCase, GetByIdUserUseCase, DeleteUserUseCase{
+@Injectable()
+export class UserService implements CreateUserUseCase, GetAllUserUseCase, GetByIdUserUseCase, DeleteUserUseCase {
     constructor(
-        private readonly createUserUseCase: CreateUserUseCase,
-        private readonly getAllUserUseCase: GetAllUserUseCase,
-        private readonly getByIdUserUseCase: GetByIdUserUseCase,
-        private readonly deleteUserUseCase: DeleteUserUseCase
-    ) {}
-
+        @Inject('CreateUserUseCase') private readonly createUserUseCase: CreateUserUseCase,
+        @Inject('GetAllUserUseCase') private readonly getAllUserUseCase: GetAllUserUseCase,
+        @Inject('GetByIdUserUseCase') private readonly getByIdUserUseCase: GetByIdUserUseCase,
+        @Inject('DeleteUserUseCase') private readonly deleteUserUseCase: DeleteUserUseCase
+    ) { }
 
     getAll(): Promise<User[]> {
         return this.getAllUserUseCase.getAll();
@@ -25,6 +26,4 @@ export class UserService implements CreateUserUseCase, GetAllUserUseCase, GetByI
     create(user: User): Promise<void> {
         return this.createUserUseCase.create(user);
     }
-
-
 }

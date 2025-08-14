@@ -1,5 +1,4 @@
 import { User } from "../../models/User";
-import { UserId } from "../../valueObject/UserId";
 
 export interface UserRepositoryPort {
     create(user: User): Promise<void>;

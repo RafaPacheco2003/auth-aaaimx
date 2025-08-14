@@ -36,9 +36,9 @@ export class UserController {
     }
 
     @Delete(':id')
-    @HttpCode(404)
+    @HttpCode(204)
     async delete(@Param('id') id: string){
-        await this.delete(id);
+        await this.service.delete(id);
 
     }
 }
