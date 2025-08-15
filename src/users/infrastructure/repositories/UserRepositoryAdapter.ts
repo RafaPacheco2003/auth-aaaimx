@@ -15,6 +15,13 @@ export class UserRepositoryAdapter implements UserRepositoryPort {
 
 
 
+
+  async updateActive(id: string): Promise<void> {
+    await this.userRepository.update(id, { is_active: true });
+  }
+
+
+
   async  update(user: User): Promise<void> {
     const entity = domainToEntity(user);
     await this.userRepository.update(entity.id, entity);

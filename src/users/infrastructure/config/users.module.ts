@@ -10,6 +10,7 @@ import { GetAllUserUseCaseImpl } from '../../application/useCases/GetAllUserUseC
 import { GetByIdUserUseCaseImpl } from '../../application/useCases/GetByIdUserUseCaseImpl';
 import { UpdateUserUseCaseImpl } from '../../application/useCases/UpdateUserUseCaseImpl';
 import { UserRepositoryPort } from '../../domain/port/out/UserRepositoryPort';
+import { UpdateUserActiveUseCaseImpl } from 'src/users/application/useCases/UpdateUserActiveUseCaseImpl';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
@@ -39,6 +40,11 @@ import { UserRepositoryPort } from '../../domain/port/out/UserRepositoryPort';
     {
       provide: 'UpdateUserUseCase',
       useFactory: (userRepository: UserRepositoryPort) => new UpdateUserUseCaseImpl(userRepository),
+      inject: ['UserRepositoryPort'],
+    },
+    {
+      provide: 'UpdateUserActiveUseCase',
+      useFactory: (userRepository: UserRepositoryPort) => new UpdateUserActiveUseCaseImpl(userRepository),
       inject: ['UserRepositoryPort'],
     },
     UserService,

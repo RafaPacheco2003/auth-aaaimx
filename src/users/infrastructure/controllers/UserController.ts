@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Param, HttpCode, Delete, Put } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, HttpCode, Delete, Put, Patch } from '@nestjs/common';
 import { UserResponse } from '../https/response/UserResponse';
 import { UserRequest } from '../https/request/UserRequest';
 import { User } from 'src/users/domain/models/User';
@@ -47,5 +47,12 @@ export class UserController {
     @HttpCode(204)
     async delete(@Param('id') id: string){
         await this.service.delete(id);
+    }
+
+    @Patch(':id/active')
+    @HttpCode(200)
+    async updateActive(@Param('id') id: string) {
+        await this.service.updateActive(id);
+        return { message: 'User activated' };
     }
 }

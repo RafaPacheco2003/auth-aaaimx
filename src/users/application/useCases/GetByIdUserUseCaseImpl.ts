@@ -12,7 +12,7 @@ export class GetByIdUserUseCaseImpl implements GetByIdUserUseCase {
     async getById(id: string): Promise<User | null> {
         const user = await this.userRepository.findById(id);
         if (!user) {
-            throw new UserErrors.UserNotFoundError(id);
+            throw UserErrors.notFound(id);
         }
         return user;
     }
