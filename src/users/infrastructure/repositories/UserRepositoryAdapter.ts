@@ -11,7 +11,14 @@ export class UserRepositoryAdapter implements UserRepositoryPort {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-  ) {}
+  ) { }
+
+
+
+  async  update(user: User): Promise<void> {
+    const entity = domainToEntity(user);
+    await this.userRepository.update(entity.id, entity);
+  }
 
   async create(user: User): Promise<void> {
     const entity = domainToEntity(user);
@@ -32,5 +39,5 @@ export class UserRepositoryAdapter implements UserRepositoryPort {
     await this.userRepository.delete(id);
   }
 
-  
+
 }

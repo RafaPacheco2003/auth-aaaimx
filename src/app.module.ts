@@ -10,6 +10,8 @@ import { CreateUserUseCaseImpl } from './users/application/useCases/CreateUserCa
 import { DeleteUserUseCaseImpl } from './users/application/useCases/DeleteUserUseCaseImpl';
 import { GetAllUserUseCaseImpl } from './users/application/useCases/GetAllUserUseCaseImpl';
 import { GetByIdUserUseCaseImpl } from './users/application/useCases/GetByIdUserUseCaseImpl';
+import { UpdateUserUseCaseImpl } from './users/application/useCases/UpdateUserUseCaseImpl';
+import { UserRepositoryPort } from './users/domain/port/out/UserRepositoryPort';
 
 @Module({
   imports: [
@@ -50,6 +52,13 @@ import { GetByIdUserUseCaseImpl } from './users/application/useCases/GetByIdUser
       provide: 'GetByIdUserUseCase',
       useClass: GetByIdUserUseCaseImpl,
     },
+    {
+      provide: 'UpdateUserUseCase',
+      useFactory: (userRepository: UserRepositoryPort) => new UpdateUserUseCaseImpl(userRepository),
+      inject: ['UserRepositoryPort'],
+    },
+    
+    
     UserService,
   ],
 })

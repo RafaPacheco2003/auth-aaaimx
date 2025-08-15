@@ -4,15 +4,21 @@ import type { CreateUserUseCase } from "src/users/domain/port/in/CreateUserUseCa
 import type { DeleteUserUseCase } from "src/users/domain/port/in/DeleteUserUseCase";
 import type { GetAllUserUseCase } from "src/users/domain/port/in/GetAllUserUseCase";
 import type { GetByIdUserUseCase } from "src/users/domain/port/in/GetByIdUserUseCase";
+import type { UpdateUserUseCase } from "src/users/domain/port/in/UpdateUserUseCase";
 
 @Injectable()
-export class UserService implements CreateUserUseCase, GetAllUserUseCase, GetByIdUserUseCase, DeleteUserUseCase {
+export class UserService implements CreateUserUseCase, GetAllUserUseCase, GetByIdUserUseCase, DeleteUserUseCase, UpdateUserUseCase {
     constructor(
         @Inject('CreateUserUseCase') private readonly createUserUseCase: CreateUserUseCase,
         @Inject('GetAllUserUseCase') private readonly getAllUserUseCase: GetAllUserUseCase,
         @Inject('GetByIdUserUseCase') private readonly getByIdUserUseCase: GetByIdUserUseCase,
-        @Inject('DeleteUserUseCase') private readonly deleteUserUseCase: DeleteUserUseCase
+        @Inject('DeleteUserUseCase') private readonly deleteUserUseCase: DeleteUserUseCase,
+        @Inject('UpdateUserUseCase') private readonly updateUserUseCase: UpdateUserUseCase
     ) { }
+    update(id: string, user: Partial<User>): Promise<User> {
+        return this.updateUserUseCase.update(id, user);
+    }
+   
 
     getAll(): Promise<User[]> {
         return this.getAllUserUseCase.getAll();

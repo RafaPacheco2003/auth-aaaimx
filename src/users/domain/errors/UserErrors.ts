@@ -1,4 +1,5 @@
 export class UserErrors extends Error {
+    static UserNotFoundError: any;
 
     constructor(message: string) {
         super(message);

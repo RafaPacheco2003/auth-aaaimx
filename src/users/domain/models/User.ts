@@ -1,3 +1,4 @@
+
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -27,6 +28,10 @@ export class User {
         this.is_active = is_active;
         this.is_verified = is_verified;
     }
+
+    update(data: Partial<User>): void {
+    Object.assign(this, data);
+}
 
     // Factory para crear nuevo usuario
     static createNew(

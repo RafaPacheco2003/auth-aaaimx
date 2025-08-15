@@ -9,12 +9,4 @@ export class Password{
     is_active: boolean;
     date_created: Date;
     id_user: string;
-
-    private constructor(){
-
-    }
-
-
-   
-    
 }

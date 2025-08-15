@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Param, HttpCode, Delete } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, HttpCode, Delete, Put } from '@nestjs/common';
 import { UserResponse } from '../https/response/UserResponse';
 import { UserRequest } from '../https/request/UserRequest';
 import { User } from 'src/users/domain/models/User';
@@ -35,10 +35,17 @@ export class UserController {
         return domain.map(domainToResponse);
     }
 
+
+    @Put(':id')
+    @HttpCode(200)
+    async update(@Param('id') id: string, @Body() request: UserRequest): Promise<UserResponse> {
+        const updated = await this.service.update(id, request);
+        return domainToResponse(updated);
+    }
+
     @Delete(':id')
     @HttpCode(204)
     async delete(@Param('id') id: string){
         await this.service.delete(id);
-
     }
 }

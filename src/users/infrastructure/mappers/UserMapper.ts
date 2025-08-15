@@ -1,6 +1,6 @@
 import { User } from "src/users/domain/models/User";
 import { UserRequest } from "../https/request/UserRequest";
-import { UserResponse } from "../https/response/UserResponse";
+import { UserResponse, UserResponseDetails } from "../https/response/UserResponse";
 import { UserEntity } from "../entities/UserEntity";
 
 // Convierte UserRequest (entrada HTTP) a User dominio
@@ -48,5 +48,19 @@ export function domainToResponse(user: User): UserResponse {
     full_name: user.first_name + ' ' + user.last_name,
     email: user.email,
     phone: user.phone
+  };
+}
+
+//Convierte User dominio a UserResponseDetails (salida HTTP)
+export function domainToResponseDetails(user: User): UserResponseDetails {
+  return {
+    id: user.id,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    full_name: user.first_name + ' ' + user.last_name,
+    email: user.email,
+    phone: user.phone,
+    is_active: user.is_active,
+    is_verified: user.is_verified
   };
 }
